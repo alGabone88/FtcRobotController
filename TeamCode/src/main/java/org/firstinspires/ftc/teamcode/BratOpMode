@@ -1,0 +1,59 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
+
+@TeleOp
+public class BratOpMode extends LinearOpMode {
+
+    double closed = 0.0;
+    double opened = 1.0;
+    double servoArmPosition;
+    DcMotor motorBrat;
+    Servo servoBratClawRight;
+    Servo servoBratClawLeft;
+    Servo servoBratLiftRight;
+    Servo servoBratLiftLeft;
+
+    @Override
+    public void runOpMode() throws InterruptedException {
+
+        double closed = 0.0;
+        double opened = 1.0;
+        double servoArmPosition;
+        DcMotor motorBrat;
+        Servo servoBratClawRight;
+        Servo servoBratClawLeft;
+        Servo servoBratLiftRight;
+        Servo servoBratLiftLeft;
+
+        motorBrat = hardwareMap.get(DcMotor.class, "motorBratLift");
+        servoBratClawRight = hardwareMap.get(Servo.class, "servoBratClawRight");
+        servoBratClawLeft = hardwareMap.get(Servo.class, "servoBratClawLeft");
+        servoBratLiftRight = hardwareMap.get(Servo.class, "servoBratLiftRight");
+        servoBratLiftLeft = hardwareMap.get(Servo.class, "servoBratLiftLeft");
+//        servoBratLiftLeft.setPosition(closed);
+        servoBratLiftRight.setPosition(closed);
+
+        waitForStart();
+
+        if (isStopRequested()) return;
+
+        while (opModeIsActive()) {
+            servoArmPosition = servoBratLiftRight.getPosition();
+
+            if (gamepad2.dpad_up) {
+//                servoBratLiftLeft.setPosition(opened);
+                servoBratLiftRight.setPosition(opened);
+            }
+
+            telemetry.addData("Poz", servoArmPosition);
+            telemetry.update();
+        }
+    }
+
+}
+
